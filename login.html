@@ -3,136 +3,132 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login</title>
+<title>TİG | Kurum Girişi</title>
 
 <style>
 * {
   box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  height: 100vh;
 }
 
-/* ÜST KIRMIZI ALAN */
-#top-section {
-  background: red;
-  height: 20vh;
+/* ANA YAPI */
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+/* SOL LOGIN */
+.login-area {
+  flex: 1;
+  background: #ffffff;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* ORTA ALAN */
-#bottom-section {
-  min-height: 70vh;
-  background: #a0d8f1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px 16px;
-}
-
-/* ALT BAŞLIK */
-#bottom-section2 {
-  height: 10vh;
-  background: #0077cc;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.2rem;
-  text-align: center;
-}
-
-/* LOGIN CONTAINER */
-.login-wrapper {
-  width: 100%;
-  max-width: 420px;
-  text-align: center;
-}
-
-/* LOGO */
-.login-wrapper img {
-  width: 150px;
-  max-width: 100%;
-  margin-bottom: 20px;
-}
-
-/* LOGIN BOX */
 .login-box {
-  background: rgba(0,0,0,0.6);
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  width: 100%;
+  max-width: 380px;
+  text-align: center;
+}
+
+.login-box img {
+  width: 100px;
+  margin-bottom: 20px;
 }
 
 .login-box h2 {
-  color: #fff;
-  margin-bottom: 20px;
+  font-size: 20px;
+  color: #222;
+  margin-bottom: 6px;
+}
+
+.login-box h3 {
+  font-size: 14px;
+  font-weight: normal;
+  color: #666;
+  margin-bottom: 30px;
 }
 
 /* INPUT */
-.user-box {
-  position: relative;
-  margin-bottom: 25px;
+.input-group {
+  margin-bottom: 15px;
 }
 
-.user-box input {
+.input-group input {
   width: 100%;
-  padding: 10px 5px;
-  font-size: 16px;
-  color: white;
-  border: none;
-  border-bottom: 1px solid white;
-  background: transparent;
-  outline: none;
-}
-
-.user-box label {
-  position: absolute;
-  top: 10px;
-  left: 5px;
-  color: white;
-  transition: 0.3s;
-  pointer-events: none;
-}
-
-.user-box input:focus + label,
-.user-box input:valid + label {
-  top: -10px;
-  font-size: 12px;
-  color: #03e9f4;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
 }
 
 /* BUTTON */
-.login-box a {
-  display: block;
-  margin-top: 15px;
-  padding: 10px;
+.login-box button {
+  width: 100%;
+  padding: 12px;
+  background: #2fa4a9;
+  border: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.login-box button:hover {
+  background: #278c90;
+}
+
+.forgot {
+  margin-top: 10px;
+  font-size: 13px;
+}
+
+.forgot a {
   text-decoration: none;
-  text-align: center;
-  border: 1px solid #03e9f4;
-  color: #03e9f4;
-  border-radius: 6px;
-  transition: 0.3s;
+  color: #1a73e8;
 }
 
-.login-box a:hover {
-  background: #03e9f4;
-  color: black;
+/* SAĞ GÖRSEL */
+.image-area {
+  flex: 1;
+  background: url("https://images.unsplash.com/photo-1580281657521-6f3d46a91b36") center/cover no-repeat;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
 }
 
-/* MOBIL DÜZEN */
-@media (max-width: 480px) {
-  #bottom-section2 {
-    font-size: 1rem;
-    padding: 0 10px;
+.image-text {
+  background: rgba(0,0,0,0.5);
+  color: white;
+  padding: 30px;
+  width: 100%;
+}
+
+.image-text h1 {
+  margin: 0;
+  font-size: 26px;
+}
+
+.image-text p {
+  margin-top: 10px;
+  font-size: 17px;
+  font-style: italic;
+}
+
+/* MOBIL */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
   }
 
-  .login-box {
-    padding: 20px;
+  .image-area {
+    height: 35vh;
   }
 }
 </style>
@@ -140,37 +136,45 @@ body {
 
 <body>
 
-<div id="top-section"></div>
+<div class="container">
 
-<div id="bottom-section2">
-  Teşhis İlişkili Gruplar Veri Girişi
-</div>
-
-<div id="bottom-section">
-  <div class="login-wrapper">
-
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Logo_of_Ministry_of_Health_%28Turkey%29.png/900px-Logo_of_Ministry_of_Health_%28Turkey%29.png">
-
+  <!-- SOL: TİG LOGIN -->
+  <div class="login-area">
     <div class="login-box">
-      <h2>Giriş</h2>
+
+      <!-- LOGO -->
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Logo_of_Ministry_of_Health_%28Turkey%29.png/300px-Logo_of_Ministry_of_Health_%28Turkey%29.png">
+
+      <h2>Teşhis İlişkili Gruplar</h2>
+      <h3>Kurumsal Veri Giriş Sistemi</h3>
 
       <form>
-        <div class="user-box">
-          <input type="text" required>
-          <label>Kullanıcı Adı</label>
+        <div class="input-group">
+          <input type="text" placeholder="Kullanıcı Adı">
         </div>
 
-        <div class="user-box">
-          <input type="password" required>
-          <label>Şifre</label>
+        <div class="input-group">
+          <input type="password" placeholder="Şifre">
         </div>
 
-        <a href="main.html">Giriş</a>
-        <a href="forgotpasword.html">Şifremi Unuttum</a>
+        <button type="submit">Giriş</button>
+
+        <div class="forgot">
+          <a href="#">Şifremi Unuttum</a>
+        </div>
       </form>
-    </div>
 
+    </div>
   </div>
+
+  <!-- SAĞ: BİLGİSEL ALAN -->
+  <div class="image-area">
+    <div class="image-text">
+      <h1>TEŞHİS İLİŞKİLİ GRUPLAR</h1>
+      <p>Sağlık hizmetlerinde standart, şeffaf ve sürdürülebilir veri yönetimi.</p>
+    </div>
+  </div>
+
 </div>
 
 </body>
