@@ -14,6 +14,7 @@
 body {
   margin: 0;
   height: 100vh;
+  background: #f5f6f7;
 }
 
 /* ANA YAPI */
@@ -34,6 +35,7 @@ body {
 .login-box {
   width: 100%;
   max-width: 380px;
+  padding: 0 16px;
   text-align: center;
 }
 
@@ -45,27 +47,32 @@ body {
 .login-box h2 {
   font-size: 20px;
   color: #222;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .login-box h3 {
   font-size: 14px;
   font-weight: normal;
   color: #666;
-  margin-bottom: 30px;
+  margin-bottom: 28px;
 }
 
 /* INPUT */
 .input-group {
-  margin-bottom: 15px;
+  margin-bottom: 14px;
 }
 
 .input-group input {
   width: 100%;
   padding: 12px;
-  border: 1px solid #ccc;
+  border: 1px solid #cfcfcf;
   border-radius: 4px;
   font-size: 14px;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: #2fa4a9;
 }
 
 /* BUTTON */
@@ -97,17 +104,32 @@ body {
 /* SAĞ GÖRSEL */
 .image-area {
   flex: 1;
-  background: url("https://www.tsoshop.co.uk/productimages/3/9789241549165.jpg") center/cover no-repeat;
   position: relative;
+  background-image: url("https://www.tsoshop.co.uk/productimages/3/9789241549165.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain; /* 🔑 KIRPMA YOK */
   display: flex;
   align-items: flex-end;
+  justify-content: center;
 }
 
+/* BLUR KATMANI */
+.image-area::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(6px);
+  background: rgba(0,0,0,0.45);
+}
+
+/* YAZI */
 .image-text {
-  background: rgba(0,0,0,0.5);
+  position: relative;
   color: white;
-  padding: 30px;
+  padding: 32px;
   width: 100%;
+  text-align: left;
 }
 
 .image-text h1 {
@@ -121,14 +143,23 @@ body {
   font-style: italic;
 }
 
-/* MOBIL */
+/* MOBİL */
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
   }
 
   .image-area {
-    height: 35vh;
+    height: 40vh;
+    background-size: contain;
+  }
+
+  .image-text h1 {
+    font-size: 22px;
+  }
+
+  .image-text p {
+    font-size: 15px;
   }
 }
 </style>
@@ -142,8 +173,7 @@ body {
   <div class="login-area">
     <div class="login-box">
 
-      <!-- LOGO -->
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Logo_of_Ministry_of_Health_%28Turkey%29.png/300px-Logo_of_Ministry_of_Health_%28Turkey%29.png">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Logo_of_Ministry_of_Health_%28Turkey%29.png/300px-Logo_of_Ministry_of_Health_%28Turkey%29.png" alt="T.C. Sağlık Bakanlığı">
 
       <h2>Teşhis İlişkili Gruplar</h2>
       <h3>Kurumsal Veri Giriş Sistemi</h3>
@@ -167,7 +197,7 @@ body {
     </div>
   </div>
 
-  <!-- SAĞ: BİLGİSEL ALAN -->
+  <!-- SAĞ -->
   <div class="image-area">
     <div class="image-text">
       <h1>TEŞHİS İLİŞKİLİ GRUPLAR</h1>
