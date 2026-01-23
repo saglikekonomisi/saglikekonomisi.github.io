@@ -198,20 +198,63 @@
 </div>
 
   <div id="Iddet" class="tab-content">
-    <div class="card" style="max-width:800px; margin:auto;">
-      <h2>⏳ İddet (Boşandıktan Sonra Evlilik Öncesi Beklenme) Süresi</h2>
-      <label>Durum:</label>
-      <select id="i_durum">
-        <option value="1">Boşanma (Adet gören)</option>
-        <option value="2">Boşanma (Adetten kesilmiş)</option>
-        <option value="3">Eşi Ölen (Vefat)</option>
-        <option value="4">Hamilelik</option>
-      </select>
-      <button onclick="calcIddet()">Süreyi Göster</button>
-      <div id="i_res" style="margin-top:15px; display:none;" class="heir"></div>
-      <div class="verse-box"><b>📖 Ayet:</b> "Boşanan kadınlar üç hayız süresi beklerler..." (Bakara, 228)</div>
-      <div class="official-warning">⚠️ EN DOĞRU BİLGİ İÇİN İL MÜFTÜLÜĞÜNE BAŞVURUNUZ. BU KONUDA ÜLKENİN YÜRÜRLÜKTE OLAN HUKUKİ MEVZUATLARI DA İNCELENMELİDİR. HEM ÜLKEDEKİ MEVZUAT HEM ŞERİ HUKUK BİRLİKTE ELE ALINIP İKİSİNDEN HANGİSİ DAHA İLERİ TARİHİ BELİRTİYORSA O TARİHE DEK EVLENİLMEMESİ, FARKLI BİR KARŞI CİNSLE HAYATIN BİRLEŞTİRİLMEMESİ UYGUN OLACAKTIR.</div>
+  <div class="card" style="max-width:800px; margin:auto;">
+
+    <h2>⏳ İddet (Boşandıktan / Vefattan Sonra Bekleme Süresi)</h2>
+
+    <label>Durum:</label>
+    <select id="i_durum">
+      <option value="1">Boşanma (Adet gören)</option>
+      <option value="2">Boşanma (Adetten kesilmiş / Henüz adet görmemiş)</option>
+      <option value="3">Eşi Vefat Eden</option>
+      <option value="4">Hamilelik</option>
+    </select>
+
+    <button onclick="calcIddet()">Süreyi Göster</button>
+
+    <div id="i_res" style="margin-top:15px; display:none;" class="heir"></div>
+
+    <!-- AYETLER -->
+    <div class="verse-box">
+      <b>📖 Kur’an’da İddet Hükümleri</b>
+
+      <p>
+        <b>• Boşanmış ve adet gören kadın:</b><br>
+        “Boşanan kadınlar üç hayız süresi beklerler…”<br>
+        <i>(Bakara Suresi, 2/228)</i>
+      </p>
+
+      <p>
+        <b>• Adetten kesilmiş veya henüz adet görmemiş kadın:</b><br>
+        “Kadınlarınızdan adetten kesilenlerin iddeti — şüphe ederseniz — üç aydır.
+        Henüz adet görmemiş olanların iddeti de üç aydır.”<br>
+        <i>(Talak Suresi, 65/4)</i>
+      </p>
+
+      <p>
+        <b>• Hamile olan kadın:</b><br>
+        “Hamile kadınların iddeti, yüklerini bırakmaları (doğum) ile sona erer.”<br>
+        <i>(Talak Suresi, 65/4)</i>
+      </p>
+
+      <p>
+        <b>• Eşi vefat eden kadın:</b><br>
+        “Sizden vefat edenlerin geride bıraktıkları eşleri,
+        kendi başlarına dört ay on gün beklerler.”<br>
+        <i>(Bakara Suresi, 2/234)</i>
+      </p>
     </div>
+
+    <!-- UYARI -->
+    <div class="official-warning">
+      ⚠️ <b>Önemli Uyarı:</b><br>
+      Bu bilgiler Kur’an ayetlerine dayalı genel bilgilendirme amaçlıdır.
+      En doğru ve bağlayıcı bilgi için <b>İl Müftülüğüne</b> başvurulmalıdır.
+      Ayrıca Türkiye Cumhuriyeti’nin yürürlükte olan <b>hukuki mevzuatı</b> da dikkate alınmalıdır.
+      Şer’î hüküm ile resmî mevzuat birlikte değerlendirilerek,
+      hangisi daha ileri bir tarihi işaret ediyorsa o süre esas alınmalıdır.
+    </div>
+
   </div>
 </div>
 
