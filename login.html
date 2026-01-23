@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TİG | Kurum Girişi</title>
+<title>TİG | Kurumsal Giriş</title>
 
 <style>
 * {
@@ -14,13 +14,13 @@
 body {
   margin: 0;
   min-height: 100vh;
+  background: #e6f5f4;
 }
 
-/* ANA ARKAPLAN */
+/* ANA YAPI */
 .container {
   display: flex;
   min-height: 100vh;
-  background: linear-gradient(135deg, #e6f5f4 0%, #f2fbfa 100%);
 }
 
 /* SOL LOGIN */
@@ -32,34 +32,35 @@ body {
   padding: 40px;
 }
 
-/* LOGIN KART */
+/* LOGIN KARTI */
 .login-box {
   width: 100%;
   max-width: 420px;
-  min-width: 320px;
   background: #ffffff;
   border-radius: 10px;
-  padding: 35px 30px;
+  padding: 26px 26px 24px;
   text-align: center;
   box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
 
 /* LOGO */
 .login-box img {
-  width: 90px;
-  margin-bottom: 15px;
+  width: 64px;
+  margin-bottom: 8px;
 }
 
+/* BAŞLIKLAR */
 .login-box h2 {
-  font-size: 20px;
-  margin: 0;
+  font-size: 18px;
+  margin: 6px 0 4px;
+  color: #222;
 }
 
 .login-box h3 {
-  font-size: 14px;
-  color: #666;
+  font-size: 13px;
   font-weight: normal;
-  margin: 6px 0 25px;
+  color: #666;
+  margin-bottom: 18px;
 }
 
 /* INPUT */
@@ -72,15 +73,17 @@ body {
   padding: 11px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  font-size: 14px;
 }
 
 /* GİRİŞ BUTONU */
 .login-box button {
   width: 100%;
   padding: 12px;
+  margin-top: 6px;
   background: #2fa4a9;
   border: none;
-  color: #fff;
+  color: white;
   font-size: 15px;
   border-radius: 4px;
   cursor: pointer;
@@ -96,33 +99,29 @@ body {
 }
 
 .forgot a {
-  display: block;
-  padding: 10px;
-  background: #fdeaea;
-  color: #c0392b;
-  border-radius: 4px;
-  text-decoration: none;
   font-size: 13px;
+  color: #2fa4a9;
+  text-decoration: none;
 }
 
 .forgot a:hover {
-  background: #f9d6d5;
+  text-decoration: underline;
 }
 
-/* SAĞ GÖRSEL */
+/* SAĞ GÖRSEL (yer varsa) */
 .image-area {
   flex: 1;
-  background: url("https://www.tsoshop.co.uk/productimages/3/9789241549165.jpg")
-              center / cover no-repeat;
+  background: url("https://www.tsoshop.co.uk/productimages/3/9789241549165.jpg") center/contain no-repeat;
+  background-color: #103f2a;
   display: flex;
   align-items: flex-end;
 }
 
 .image-text {
+  background: rgba(0,0,0,0.6);
+  color: white;
+  padding: 28px;
   width: 100%;
-  padding: 25px;
-  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
-  color: #fff;
 }
 
 .image-text h1 {
@@ -136,22 +135,29 @@ body {
   font-style: italic;
 }
 
-/* KÜÇÜK EKRANLARDA SAĞ GÖRSEL GİZLENİR */
-@media (max-width: 1100px) {
+/* GÖRSELİ DAR EKRANDA KAPAT */
+@media (max-width: 900px) {
   .image-area {
     display: none;
   }
 }
 
-/* MOBİL */
+/* 📱 MOBİL – UX DÜZELTİLMİŞ */
 @media (max-width: 600px) {
+
+  body {
+    background: #e6f5f4;
+  }
+
   .login-area {
-    padding: 20px;
+    padding: 24px 16px;
+    align-items: center;
   }
 
   .login-box {
     max-width: 100%;
-    border-radius: 8px;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
   }
 }
 </style>
@@ -161,10 +167,13 @@ body {
 
 <div class="container">
 
+  <!-- SOL: LOGIN -->
   <div class="login-area">
     <div class="login-box">
 
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Logo_of_Ministry_of_Health_%28Turkey%29.png/300px-Logo_of_Ministry_of_Health_%28Turkey%29.png">
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Logo_of_Ministry_of_Health_%28Turkey%29.png/300px-Logo_of_Ministry_of_Health_%28Turkey%29.png"
+        alt="Sağlık Bakanlığı">
 
       <h2>Teşhis İlişkili Gruplar</h2>
       <h3>Kurumsal Veri Giriş Sistemi</h3>
@@ -188,6 +197,7 @@ body {
     </div>
   </div>
 
+  <!-- SAĞ: GÖRSEL -->
   <div class="image-area">
     <div class="image-text">
       <h1>TEŞHİS İLİŞKİLİ GRUPLAR</h1>
