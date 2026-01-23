@@ -13,52 +13,53 @@
 
 body {
   margin: 0;
-  height: 100vh;
-  background: #f1f3f4; /* ❌ tam beyaz değil */
+  min-height: 100vh;
 }
 
-/* ANA YAPI */
+/* ANA ARKAPLAN */
 .container {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e6f5f4 0%, #f2fbfa 100%);
 }
 
 /* SOL LOGIN */
 .login-area {
   flex: 1;
-  background: #e6f6f5; /* ✅ TURKUAZ TON */
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 40px;
 }
 
 /* LOGIN KART */
 .login-box {
   width: 100%;
-  max-width: 380px;
-  padding: 28px 24px;
+  max-width: 420px;
+  min-width: 320px;
   background: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  border-radius: 10px;
+  padding: 35px 30px;
   text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
 
+/* LOGO */
 .login-box img {
   width: 90px;
-  margin-bottom: 16px;
+  margin-bottom: 15px;
 }
 
 .login-box h2 {
   font-size: 20px;
-  color: #222;
-  margin-bottom: 4px;
+  margin: 0;
 }
 
 .login-box h3 {
   font-size: 14px;
-  font-weight: normal;
   color: #666;
-  margin-bottom: 24px;
+  font-weight: normal;
+  margin: 6px 0 25px;
 }
 
 /* INPUT */
@@ -68,15 +69,9 @@ body {
 
 .input-group input {
   width: 100%;
-  padding: 12px;
-  border: 1px solid #cfcfcf;
+  padding: 11px;
+  border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: 14px;
-}
-
-.input-group input:focus {
-  outline: none;
-  border-color: #2fa4a9;
 }
 
 /* GİRİŞ BUTONU */
@@ -85,8 +80,8 @@ body {
   padding: 12px;
   background: #2fa4a9;
   border: none;
-  color: white;
-  font-size: 16px;
+  color: #fff;
+  font-size: 15px;
   border-radius: 4px;
   cursor: pointer;
 }
@@ -95,58 +90,68 @@ body {
   background: #278c90;
 }
 
-/* ŞİFREMİ UNUTTUM (KIRMIZI TON) */
+/* ŞİFREMİ UNUTTUM */
 .forgot {
-  margin-top: 14px;
-  padding: 10px;
-  background: #fdeaea;
-  border-radius: 4px;
+  margin-top: 12px;
 }
 
 .forgot a {
+  display: block;
+  padding: 10px;
+  background: #fdeaea;
+  color: #c0392b;
+  border-radius: 4px;
   text-decoration: none;
   font-size: 13px;
-  color: #c62828;
-  font-weight: 500;
 }
 
-/* SAĞ GÖRSEL (ALAN VARSA) */
+.forgot a:hover {
+  background: #f9d6d5;
+}
+
+/* SAĞ GÖRSEL */
 .image-area {
   flex: 1;
-  background-image: url("https://www.tsoshop.co.uk/productimages/3/9789241549165.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  background: url("https://www.tsoshop.co.uk/productimages/3/9789241549165.jpg")
+              center / cover no-repeat;
   display: flex;
   align-items: flex-end;
 }
 
 .image-text {
-  background: rgba(0,0,0,0.5);
-  color: white;
-  padding: 30px;
   width: 100%;
+  padding: 25px;
+  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+  color: #fff;
 }
 
 .image-text h1 {
   margin: 0;
-  font-size: 26px;
+  font-size: 22px;
 }
 
 .image-text p {
-  margin-top: 10px;
-  font-size: 17px;
+  margin-top: 8px;
+  font-size: 15px;
   font-style: italic;
 }
 
-/* DAR EKRAN → SAĞ GÖRSEL KALKAR */
-@media (max-width: 992px) {
+/* KÜÇÜK EKRANLARDA SAĞ GÖRSEL GİZLENİR */
+@media (max-width: 1100px) {
   .image-area {
     display: none;
   }
+}
 
+/* MOBİL */
+@media (max-width: 600px) {
   .login-area {
-    flex: 1 1 100%;
+    padding: 20px;
+  }
+
+  .login-box {
+    max-width: 100%;
+    border-radius: 8px;
   }
 }
 </style>
@@ -156,11 +161,10 @@ body {
 
 <div class="container">
 
-  <!-- SOL: TİG LOGIN -->
   <div class="login-area">
     <div class="login-box">
 
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Logo_of_Ministry_of_Health_%28Turkey%29.png/300px-Logo_of_Ministry_of_Health_%28Turkey%29.png" alt="T.C. Sağlık Bakanlığı">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Logo_of_Ministry_of_Health_%28Turkey%29.png/300px-Logo_of_Ministry_of_Health_%28Turkey%29.png">
 
       <h2>Teşhis İlişkili Gruplar</h2>
       <h3>Kurumsal Veri Giriş Sistemi</h3>
@@ -184,7 +188,6 @@ body {
     </div>
   </div>
 
-  <!-- SAĞ -->
   <div class="image-area">
     <div class="image-text">
       <h1>TEŞHİS İLİŞKİLİ GRUPLAR</h1>
