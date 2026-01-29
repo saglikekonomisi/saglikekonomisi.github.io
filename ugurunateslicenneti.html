@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Uğur'un Ateşli Cenneti</title>
+		<style>
+		
+			body {
+				background: #1a1a1a;
+				margin: 0;
+				padding: 0;
+				overflow: hidden;
+			}
+
+			h2 {
+				color: #ff4500;
+				font-family:  'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+				text-align: center;
+				text-shadow: 2px 2px 4px #000;
+				margin: 10px 0;
+			}
+/* Oyuncu Seçici Alanı */
+			#character-selector {
+				position: absolute;
+				
+				left: 10px;
+				z-index: 1000;
+				background: rgba(0, 0, 0, 0.7);
+				padding: 10px;
+				border-radius: 8px;
+				border: 1px solid #ff4500;
+				color: white;
+				font-family: sans-serif;
+			}
+
+
+
+			.game {
+				position: relative;
+				overflow: hidden;
+				width: 100vw;
+				height: 85vh;
+				border-top: 1px solid #ff4500;
+				background: #222;
+			}
+
+			#emojiSelect {
+				background: #444;
+				color: white;
+				border: 1px solid #666;
+				padding: 5px;
+				cursor: pointer;
+			}
+
+			.background {
+				table-layout: fixed;
+				border-spacing: 0;
+			}
+
+			.background td {
+				padding: 0;
+				width: 20px;
+				
+			}
+
+			/* TUĞLA DOKUSU */
+			.wall {
+				background-image: url('https://i.hizliresim.com/1phltp7.png');
+				background-size: cover;
+				border: none;
+			}
+
+			/* LAV DOKUSU VE TERMOMETRE */
+			.lava {
+				background-image: url('https://i.hizliresim.com/sllk7uu.JPG');
+				background-size: cover;
+				position: relative;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			.lava::after {
+				content: '🌡️';
+				font-size: 12px;
+				position: absolute;
+				animation: thermoFlash 2s infinite;
+				opacity: 0;
+			}
+
+			.background td {
+				padding: 0;
+			}
+
+
+			.wall {
+				background: #444;
+				border: solid 3px #333;
+				box-sizing: border-box;
+			}
+
+			.actor {
+				position: absolute;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			.coin {
+				background: #e2e838;
+				border-radius: 50%;
+				box-shadow: 0 0 10px #ffee00;
+			}
+
+			/* Oyuncu ve Lav emojilerinin görünümü */
+			.player {
+				background: transparent;
+				font-size: 24px;
+			}
+
+			.Lava {
+				background: transparent !important;
+				font-size: 20px;
+			}
+
+			.lost .player {
+				opacity: 0.5;
+				filter: grayscale(1);
+			}
+
+			.won .player {
+				transform: scale(1.2);
+			}
+
+			.game {
+				position: relative;
+				overflow: hidden;
+				width: 100vw;
+				height: 80vh;
+				border-top: 2px solid #ff4500;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="character-selector">
+			<label for="emojiSelect">Karakter Seç: </label>
+			<select id="emojiSelect">
+				<option value="🐱">🐱 Kedi</option>
+				<option value="🤖">🤖 Robot</option>
+				<option value="🦖">🦖 Dino</option>
+				<option value="👻">👻 Hayalet</option>
+				<option value="🧙‍♂️">🧙‍♂️ Büyücü</option>
+			</select>
+		</div>
+
+		<h2>Uğur'un Ateşli Cenneti</h2>
+
+		<script>
+			// Global oyuncu emojisi değişkeni
+			var currentEmoji = "🐱";
+			document.getElementById("emojiSelect").addEventListener("change", function(e) {
+				currentEmoji = e.target.value;
+			});
+
+			var LEVELS = [
+				[
+					'                                                                                ',
+					'                                                                                ',
+					'                                                                                ',
+					'                                                                                ',
+					'                                                                                ',
+					'                                                                                ',
+					'                                                                  xxx           ',
+					'                                                    xx      xx    xx!xx         ',
+					'                                     o o      xx                  x!!!x         ',
+					'                                                                  xx!xx         ',
+					'                                    xxxxx                          xvx           ',
+					'                                                                           xx  ',
+					'  xx                                       o o                               x  ',
+					'  x                       o                                                  x  ',
+					'  x                                      xxxxx                              o x  ',
+					'  x           xxxx        o                                                  x  ',
+					'  x  @        x  x                                                 xxxxx       x  ',
+					'  xxxxxxxxxxxx  xxxxxxxxxxxxxxx  xxxxxxxxxxxxxxxxxxxx     xxxxxxx   xxxxxxxxx  ',
+					'                               x  x                   x     x                   ',
+					'                               x!!!x                   x!!!!!x                   ',
+					'                               x!!!x                   x!!!!!x                   ',
+					'                               xxxxx                   xxxxxxx                   ',
+					'                                                                                ',
+					'                                                                                ',
+				],
+				[
+					'                                      x!!x                        xxxxxxx                                    x!x  ',
+					'                                      x!!x                     xxxx    xxxx                                  x!x  ',
+					'                                      x!!xxxxxxxxxx            xx            xx                                x!x  ',
+					'                                      xx!!!!!!!!!!xx          xx              xx                               x!x  ',
+					'                                       xxxxxxxxxx!!x          x                     o  o  o  x!x  ',
+					'                                                xx!x          x     o  o                                 xx!x  ',
+					'                                                 x!x          x                                xxxxxxxxxxxxxxx!!x  ',
+					'                                                 xvx          x     x  x                             !!!!!!!!!!!!!!xx  ',
+					'                                                              xx  |  |  |  xx             xxxxxxxxxxxxxxxxxxxxx   ',
+					'                                                               xx!!!!!!!!!!!xx             v                        ',
+					'                                                                xxxx!!!!!xxxx                                     ',
+					'                                                x     x            xxxxxxx         xxx         xxx                  ',
+					'                                                x     x                            x x         x x                  ',
+					'                                                x     x                             x         x                    ',
+					'                                                x     x                             xx         x                    ',
+					'                                                xx    x                             x         x                    ',
+					'                                                x     x      o  o     x  x         x         x                    ',
+					'                xxxxxxx         xxx   xxx        x     x                x  x         x         x                    ',
+					'               xx     xx         x   x          x     x      xxxxxx    x  x   xxxxxxxxx       x                    ',
+					'              xx       xx         x o x          x    xx                x  x   x               x                    ',
+					'      @        x         x         x   x          x     x                x  x   x               x                    ',
+					'     xxx       x         x         x   x          x     x                x  xxxxx   xxxxxx      x                    ',
+					'     x x       x         x        xx o xx         x     x                x     o      x x         x                    ',
+					'!!!!x x!!!!!!x         x!!!!!!xx     xx!!!!!!!!xx    x!!!!!!!!!!     x     =      x x         x                    ',
+					'!!!!x x!!!!!!x         x!!!!!xx        xxxxxxxxxx     x!!!!!!!xx!     xxxxxxxxxxxxx xx  o o  xx                    ',
+					'!!!!x x!!!!!!x         x!!!!!x    o                  xx!!!!!!xx !                     xx     xx                     ',
+					'!!!!x x!!!!!!x         x!!!!!x                      xx!!!!!!xx  !                      xxxxxxx                      ',
+					'!!!!x x!!!!!!x         x!!!!!xx        xxxxxxxxxxxxxx!!!!!!xx   !                                                  ',
+					'!!!!x x!!!!!!x         x!!!!!!xxxxxxxxx!!!!!!!!!!!!!!!!!!xx    !                                                  ',
+					'!!!!x x!!!!!!x         x!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!xx     !                                                  ',
+				]
+			];
+
+			function Vector(x, y) {
+				this.x = x;
+				this.y = y;
+			}
+
+			Vector.prototype.plus = function (other) {
+				return new Vector(this.x + other.x, this.y + other.y);
+			};
+
+			Vector.prototype.times = function (scale) {
+				return new Vector(this.x * scale, this.y * scale);
+			};
+
+			var actorchars = {
+				'@': Player,
+				o: Coin,
+				'=': Lava,
+				'|': Lava,
+				v: Lava,
+			};
+
+			function Player(pos) {
+				this.pos = pos.plus(new Vector(0, -0.5));
+				this.size = new Vector(0.8, 0.8);
+				this.speed = new Vector(0, 0);
+			}
+			Player.prototype.type = 'player';
+
+			function Lava(pos, ch) {
+				this.pos = pos;
+				this.size = new Vector(1, 1);
+				if (ch === '=') this.speed = new Vector(2, 0);
+				else if (ch === '|') this.speed = new Vector(0, 2);
+				else if (ch === 'v') {
+					this.speed = new Vector(0, 3);
+					this.repeatPos = pos;
+				}
+			}
+			Lava.prototype.type = 'Lava';
+
+			function Coin(pos) {
+				this.basePos = this.pos = pos;
+				this.size = new Vector(0.6, 0.6);
+				this.wobble = Math.random() * Math.PI * 2;
+			}
+			Coin.prototype.type = 'coin';
+
+			function Level(plan) {
+				this.width = plan[0].length;
+				this.height = plan.length;
+				this.grid = [];
+				this.actors = [];
+
+				for (var y = 0; y < this.height; y++) {
+					var line = plan[y],
+						gridLine = [];
+					for (var x = 0; x < this.width; x++) {
+						var ch = line[x],
+							fieldType = null;
+						var Actor = actorchars[ch];
+						if (Actor) this.actors.push(new Actor(new Vector(x, y), ch));
+						else if (ch === 'x') fieldType = 'wall';
+						else if (ch === '!') fieldType = 'lava';
+						gridLine.push(fieldType);
+					}
+					this.grid.push(gridLine);
+				}
+				this.player = this.actors.filter(function (actor) {
+					return actor.type === 'player';
+				})[0];
+				this.status = this.finishDelay = null;
+			}
+
+			Level.prototype.isFinished = function () {
+				return this.status != null && this.finishDelay < 0;
+			};
+
+			function element(name, className) {
+				var elem = document.createElement(name);
+				if (className) elem.className = className;
+				return elem;
+			}
+
+			function DOMDisplay(parent, level) {
+				this.wrap = parent.appendChild(element('div', 'game'));
+				this.level = level;
+				this.wrap.appendChild(this.drawBackground());
+				this.actorLayer = null;
+				this.drawFrame();
+			}
+
+			var scale = 20;
+
+			DOMDisplay.prototype.drawBackground = function () {
+				var table = element('table', 'background');
+				table.style.width = this.level.width * scale + 'px';
+				table.style.height = this.level.height * scale + 'px';
+				this.level.grid.forEach(function (row) {
+					var rowElement = table.appendChild(element('tr'));
+					rowElement.style.height = scale + 'px';
+					row.forEach(function (type) {
+						rowElement.appendChild(element('td', type));
+					});
+				});
+				return table;
+			};
+
+			DOMDisplay.prototype.drawActors = function () {
+				var wrap = element('div');
+				this.level.actors.forEach(function (actor) {
+					var rect = wrap.appendChild(element('div', 'actor ' + actor.type));
+					rect.style.width = actor.size.x * scale + 'px';
+					rect.style.height = actor.size.y * scale + 'px';
+					rect.style.left = actor.pos.x * scale + 'px';
+					rect.style.top = actor.pos.y * scale + 'px';
+					
+					// Emoji Ekleme Mantığı
+					if(actor.type === "player") {
+						rect.textContent = currentEmoji;
+						rect.style.fontSize = (scale * 1.2) + "px";
+					} else if (actor.type === "Lava") {
+						rect.textContent = "🔥";
+						rect.style.fontSize = (scale * 0.9) + "px";
+					}
+				});
+				return wrap;
+			};
+
+			DOMDisplay.prototype.drawFrame = function () {
+				if (this.actorLayer) this.wrap.removeChild(this.actorLayer);
+				this.actorLayer = this.wrap.appendChild(this.drawActors());
+				this.wrap.className = 'game ' + (this.level.status || '');
+				this.scrollPlayerIntoView();
+			};
+
+			DOMDisplay.prototype.scrollPlayerIntoView = function () {
+				var width = this.wrap.clientWidth;
+				var height = this.wrap.clientHeight;
+				var margin = width / 3;
+				var left = this.wrap.scrollLeft, right = left + width;
+				var top = this.wrap.scrollTop, bottom = top + height;
+				var player = this.level.player;
+				var center = player.pos.plus(player.size.times(0.5)).times(scale);
+
+				if (center.x < left + margin) this.wrap.scrollLeft = center.x - margin;
+				else if (center.x > right - margin) this.wrap.scrollLeft = center.x + margin - width;
+				if (center.y < top + margin) this.wrap.scrollTop = center.y - margin;
+				else if (center.y > bottom - margin) this.wrap.scrollTop = center.y + margin - height;
+			};
+
+			DOMDisplay.prototype.clear = function () {
+				this.wrap.parentNode.removeChild(this.wrap);
+			};
+
+			Level.prototype.obstacleAt = function (pos, size) {
+				var xStart = Math.floor(pos.x), xEnd = Math.ceil(pos.x + size.x);
+				var yStart = Math.floor(pos.y), yEnd = Math.ceil(pos.y + size.y);
+				if (xStart < 0 || xEnd > this.width || yStart < 0) return 'wall';
+				if (yEnd > this.height) return 'lava';
+				for (var y = yStart; y < yEnd; y++) {
+					for (var x = xStart; x < xEnd; x++) {
+						var fieldType = this.grid[y][x];
+						if (fieldType) return fieldType;
+					}
+				}
+			};
+
+			Level.prototype.actorAt = function (actor) {
+				for (var i = 0; i < this.actors.length; i++) {
+					var other = this.actors[i];
+					if (other != actor &&
+						actor.pos.x + actor.size.x > other.pos.x &&
+						actor.pos.x < other.pos.x + other.size.x &&
+						actor.pos.y + actor.size.y > other.pos.y &&
+						actor.pos.y < other.pos.y + other.size.y)
+						return other;
+				}
+			};
+
+			Level.prototype.animate = function (step, keys) {
+				if (this.status != null) this.finishDelay -= step;
+				while (step > 0) {
+					var thisStep = Math.min(step, 0.05);
+					this.actors.forEach(function (actor) {
+						actor.act(thisStep, this, keys);
+					}, this);
+					step -= thisStep;
+				}
+			};
+
+			Lava.prototype.act = function (step, level) {
+				var newPos = this.pos.plus(this.speed.times(step));
+				if (!level.obstacleAt(newPos, this.size)) this.pos = newPos;
+				else if (this.repeatPos) this.pos = this.repeatPos;
+				else this.speed = this.speed.times(-1);
+			};
+
+			Coin.prototype.act = function (step) {
+				this.wobble += step * 8;
+				var wobblePos = Math.sin(this.wobble) * 0.07;
+				this.pos = this.basePos.plus(new Vector(0, wobblePos));
+			};
+
+			Player.prototype.act = function (step, level, keys) {
+				// Move X
+				this.speed.x = 0;
+				if (keys.left) this.speed.x -= 10;
+				if (keys.right) this.speed.x += 10;
+				var motionX = new Vector(this.speed.x * step, 0);
+				var newPos = this.pos.plus(motionX);
+				var obstacleX = level.obstacleAt(newPos, this.size);
+				if (obstacleX) level.playerTouched(obstacleX);
+				else this.pos = newPos;
+
+				// Move Y
+				this.speed.y += step * 30;
+				var motionY = new Vector(0, this.speed.y * step);
+				var newPos = this.pos.plus(motionY);
+				var obstacleY = level.obstacleAt(newPos, this.size);
+				if (obstacleY) {
+					level.playerTouched(obstacleY);
+					if (keys.up && this.speed.y > 0) this.speed.y = -17;
+					else this.speed.y = 0;
+				} else {
+					this.pos = newPos;
+				}
+
+				var otherActor = level.actorAt(this);
+				if (otherActor) level.playerTouched(otherActor.type, otherActor);
+
+				if (level.status == 'lost') {
+					this.pos.y += step;
+					this.size.y -= step;
+				}
+			};
+
+			Level.prototype.playerTouched = function (type, actor) {
+				if (type == 'lava' && this.status == null) {
+					this.status = 'lost';
+					this.finishDelay = 1;
+				} else if (type == 'coin') {
+					this.actors = this.actors.filter(function (other) { return other != actor; });
+					if (!this.actors.some(function (actor) { return actor.type == 'coin'; })) {
+						this.status = 'won';
+						this.finishDelay = 1;
+					}
+				}
+			};
+
+			var arrowCodes = { 37: 'left', 38: 'up', 39: 'right' };
+			function trackKeys(codes) {
+				var pressed = Object.create(null);
+				function handler(event) {
+					if (codes.hasOwnProperty(event.keyCode)) {
+						pressed[codes[event.keyCode]] = (event.type == 'keydown');
+						event.preventDefault();
+					}
+				}
+				addEventListener('keydown', handler);
+				addEventListener('keyup', handler);
+				return pressed;
+			}
+
+			function runAnimation(frameFunc) {
+				var lastTime = null;
+				function frame(time) {
+					var stop = false;
+					if (lastTime != null) {
+						var timeStep = Math.min(time - lastTime, 100) / 1000;
+						stop = frameFunc(timeStep) === false;
+					}
+					lastTime = time;
+					if (!stop) requestAnimationFrame(frame);
+				}
+				requestAnimationFrame(frame);
+			}
+
+			var arrows = trackKeys(arrowCodes);
+
+			function runLevel(level, Display, andThen) {
+				var display = new Display(document.body, level);
+				runAnimation(function (step) {
+					level.animate(step, arrows);
+					display.drawFrame(step);
+					if (level.isFinished()) {
+						display.clear();
+						if (andThen) andThen(level.status);
+						return false;
+					}
+				});
+			}
+
+			function runGame(plans, Display) {
+				function startLevel(n) {
+					runLevel(new Level(plans[n]), Display, function (status) {
+						if (status == 'lost') startLevel(n);
+						else if (n < plans.length - 1) startLevel(n + 1);
+						else {
+							alert('Tebrikler Uğur! Cenneti fethettin!');
+							startLevel(0);
+						}
+					});
+				}
+				startLevel(0);
+			}
+
+			runGame(LEVELS, DOMDisplay);
+		</script>
+	</body>
+</html>
