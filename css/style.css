@@ -1,13 +1,14 @@
-
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather+Sans:wght@400;700&display=swap");
 body {
   font-family: 'Lato', sans-serif;
   color: #040000;
 }
-
+.body {
+    margin: 0;
+}
 .layout_padding {
-  padding-top: 120px;
-  padding-bottom: 120px;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 .layout_padding2 {
@@ -23,11 +24,11 @@ body {
 }
 
 .layout_padding-top {
-  padding-top: 120px;
+  padding-top: 30px;
 }
 
 .layout_padding-bottom {
-  padding-bottom: 120px;
+  padding-bottom: 30px;
 }
 
 .heading_container {
@@ -290,7 +291,7 @@ a:focus {
 }
 
 .slider_section .detail-box {
-  padding-bottom: 90px;
+  padding-bottom: 0px;
 }
 
 .slider_section .detail-box h1 {
@@ -359,8 +360,8 @@ a:focus {
 }
 
 .feature_section .feature_container .box .img-box {
-  width: 90px;
-  height: 90px;
+  width: 50px;
+  height: 50px;
 }
 
 .feature_section .feature_container .box .img-box svg {
@@ -416,7 +417,8 @@ a:focus {
   display: inline-block;
   font-family: 'Merriweather Sans', sans-serif;
   text-transform: uppercase;
-  padding: 10px 45px;
+ 
+
   background-color: #0355cc;
   border: 1px solid #0355cc;
   border-radius: 2px;
@@ -498,8 +500,8 @@ a:focus {
 }
 
 .service_section .box .img-box {
-  width: 65px;
-  height: 65px;
+  width: 120px;
+  height: 120px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
