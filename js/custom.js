@@ -63,4 +63,18 @@ function showPrivacyPolicy() {
     alert(policyText);
 }
 
+window.addEventListener('load', function() {
+    const loader = document.getElementById('loader-wrapper');
+    const content = document.getElementById('main-content');
 
+    // 3 saniye (3000ms) bekle
+    setTimeout(function() {
+        loader.classList.add('fade-out'); // Yumuşakça kaybolsun
+        
+        setTimeout(function() {
+            loader.style.display = 'none'; // Tamamen kaldır
+            content.style.display = 'block'; // Ana içeriği göster
+        }, 500); // Fade out süresi kadar bekle
+        
+    }, 3000); 
+});
