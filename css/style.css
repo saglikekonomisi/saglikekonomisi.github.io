@@ -963,6 +963,65 @@ a:focus {
     height: 120px;
 
 } 
+/* Sayfa scroll'u kilitle */
+body.loading {
+    overflow: hidden;
+}
+
+/* Loader */
+#loader-wrapper {
+    position: fixed;
+    inset: 0; /* top,left,right,bottom yerine */
+    width: 100%;
+    height: 100dvh; /* mobil uyumlu */
+    background: url('../images/animasyon.jpg') center/cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+/* Arka plan karartma */
+#loader-wrapper::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+}
+
+/* Yazı */
+.loader-content {
+    position: relative;
+    z-index: 2;
+}
+
+.rotating-text {
+    font-size: 48px;
+    font-weight: bold;
+    color: #fff;
+    letter-spacing: 4px;
+    animation: fadeZoom 2s ease-in-out infinite alternate;
+}
+
+/* Yazı animasyonu */
+@keyframes fadeZoom {
+    from {
+        opacity: 0.6;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+}
+
+/* Loader gizlenince */
+#loader-wrapper.hide {
+    opacity: 0;
+    visibility: hidden;
+}
+
 
 /* end footer section*/
 /*# sourceMappingURL=style.css.map */
