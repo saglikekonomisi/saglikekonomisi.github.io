@@ -78,3 +78,24 @@ window.addEventListener('load', function() {
         
     }, 3000); 
 });
+
+
+var modal = document.getElementById("imageModal");
+var modalImg = document.getElementById("modalImg");
+var captionText = document.getElementById("caption");
+
+document.querySelectorAll(".img-box img").forEach(function(img){
+  img.onclick = function(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    captionText.innerHTML = this.alt;
+  }
+});
+
+document.querySelector(".close").onclick = function() {
+  modal.style.display = "none";
+};
+
+modal.onclick = function(e){
+  if(e.target === modal) modal.style.display = "none";
+};
