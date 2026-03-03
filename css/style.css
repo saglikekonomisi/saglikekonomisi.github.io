@@ -8,7 +8,7 @@ body {
 }
 .layout_padding {
   padding-top: 30px;
-  padding-bottom: 30px;
+ 
 }
 
 .layout_padding2 {
@@ -16,7 +16,7 @@ body {
 }
 
 .layout_padding2-top {
-  padding-top: 45px;
+  padding-top: 5px;
 }
 
 .layout_padding2-bottom {
@@ -24,11 +24,11 @@ body {
 }
 
 .layout_padding-top {
-  padding-top: 30px;
+  padding-top: 10px;
 }
 
 .layout_padding-bottom {
-  padding-bottom: 30px;
+  padding-bottom: 10px;
 }
 
 .heading_container {
@@ -556,7 +556,7 @@ a:focus {
   display: inline-block;
   font-family: 'Merriweather Sans', sans-serif;
   text-transform: uppercase;
-  padding: 10px 45px;
+  padding: 10px 15px;
   background-color: #0355cc;
   border: 1px solid #0355cc;
   border-radius: 0;
@@ -634,7 +634,7 @@ a:focus {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  margin-top: 20px;
+
 }
 
 .client_section .owl-carousel .owl-nav button {
@@ -642,7 +642,7 @@ a:focus {
   height: 50px;
   background-color: #0355cc;
   outline: none;
-  margin: 0 20px;
+
   color: #ffffff;
 }
 
@@ -1022,6 +1022,49 @@ body.loading {
     visibility: hidden;
 }
 
+
+/*menü arkaplanı */
+.header_bottom {
+    background-color: #f8f4ec !important;
+}
+
+/* Logo + firma bilgisi yan yana */
+#ABC .client_id {
+    display: flex;
+    align-items: center;   /* dikey ortalama */
+    gap: 20px;
+}
+
+/* Logo boyut */
+#ABC .img-boxet img {
+    width: 90px;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Firma adı ortalı hizalı */
+#ABC .client_detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Firma adı */
+#ABC .client_info h6 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* Yıldızlar */
+#ABC .client_info i {
+    color: #f4b400;
+    margin-right: 3px;
+}
+
+/* Yorum metni altta tam genişlik */
+#ABC .client_text {
+}
 
 /* end footer section*/
 /*# sourceMappingURL=style.css.map */
