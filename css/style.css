@@ -365,9 +365,7 @@ a:focus {
 }
 
 .feature_section .feature_container .box .img-box svg {
-  width: 100%;
-  height: auto;
-  max-height: 100%;
+  width: 50px;
   fill: #726dae;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
@@ -430,7 +428,7 @@ a:focus {
   color: #0355cc;
 }
 
-.about_section .img-box img {
+.about_section img {
   width: 100%;
 }
 
@@ -445,7 +443,7 @@ a:focus {
 }
 
 .professional_section .img-box img {
-  width: 100%;
+  width: 60%;
 }
 
 .professional_section .detail-box h2 {
